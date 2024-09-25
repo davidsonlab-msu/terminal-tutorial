@@ -95,14 +95,59 @@ ls -lh
 head Osag_proteins_clean.fasta
 ```
 
-Great, so there are 20,765 genes identified in the genome. Lets see if this infomation matches what is in our GTF file.
+Great, so there are 20,765 genes identified in the genome. Lets see if this infomation matches what is in our GTF file. First, lets preview what the GTF file looks like again:
 
-For this task, lets utilize `awk`, another powerful text manipulating programming language
+```bash
+head -20 Osag1.gtf
+```
+We can see that a GTF describes the structure of a gene model within a genome. For example, the scaffold location is given, as well as the start and end coordinates of gene features like exons, start, and stop codons. 
 
+If we want to count the number of transcripts in the file, we could try an (incorrect) approach similar to that above. For example:
 
+```bash
+grep "jg*" Osag1.gtf | wc -l
+```
+However, this command is inappropriate given the pattern "jg" occurs in multiple lines. Instead, we want to only count the lines in which column 3 has the value "transcript". For this task, lets utilize `awk`, another powerful text manipulating programming language.
 
+First, lets print the 3rd column of the file to get an idea of what sorts of values are there:
 
+```bash
+awk -v FS="\t" '{print $3}' Osag1.gtf | head -20
+```
 
+Looks good. Now lets filter for lines that only have the value of "transcript". Note: many other conditions can be applied within awk (e.g. >, <, mathmatical formulas). 
+
+```bash
+awk -v FS="\t" '{if ($3 == "transcript")  print }' Osag1.gtf | head -20
+```
+
+Seems like its working! Lets count and see if the value matches that from the protein file. 
+
+```bash
+awk -v FS="\t" '{if ($3 == "transcript")  print }' Osag1.gtf | wc -l
+```
+Indeed it does. 
+
+To finish today, lets try to now find out more about the function of these gene models. For this, lets dive into the `annotations` folder. But first, for the sake of the exercise, lets make a copy of our `*nucleotides.fasta` file and place it into our annotations folder. 
+
+```bash
+cp Osag_proteins.fasta ../annotations/
+```
+
+Remember, the `..` indicates to go "back" one directory. Lets check and make sure the file was copied successfully and then move our current directory to the annotations folder.
+
+```bash
+ls -lh ../annotations
+cd ../annotations
+```
+
+Let's check out the `Osag_best_hits.txt` file, which tells us the best annotation "hit" for each gene model from several databases. 
+
+```bash
+head Osag_best_hits.txt
+```
+
+Now, lets do a *rough* search for 
 
 
 
