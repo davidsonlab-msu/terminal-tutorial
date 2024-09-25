@@ -33,3 +33,75 @@ This directory contains three files.
 2) A `fasta` file describing the nueclotide form of Osag genes
 3) A `fasta` file describing the protein form of Osag genes
 
+Lets see what these files have to offer:
+
+```bash
+cd genes
+```
+
+First, lets print the file contents of the `gtf` file using the `cat` command:
+
+```bash
+cat Osag1.gtf
+```
+WAIT!! This file is quite large (22Mb), so you like had thousands of lines of text fly across your screen, which is a bit much. Lets approach this a bit more elegantly with the `head` command, which will print the first 10 lines of the file (`tail` in contrast, prints the final 10 lines):
+
+```bash
+head Osag1.gtf
+```
+Lets do the same for the protein sequences, but this time print the first 100 lines:
+
+```bash
+head -100 Osag_proteins.fasta
+```
+
+Lets retrieve some additional information about this file, such as the number of lines and characters:
+
+```bash
+wc -l Osag_proteins.fasta
+wc -c Osag_proteins.fasta
+```
+
+What if we want to just print the names of the genes? We can use `grep` to do this easily. Here the double quotes `""` tell grep a pattern to look for, the `^` symbol denotes the beginning of the line, and the `>` character is simply a character to ask grep to look for. In other works, we are asking `grep` to pull only lines that begin with a `>`.
+
+```bash
+grep "^>" Osag_proteins.fasta
+```
+
+This printed out many lines. How many exactly? We can "pipe" the results of one command to a second command using the `|` symbol. This is extremely useful when there are many steps in manipulating or analyzing data. Lets pipe the grepm results to the `wc` command above to count how many genes (in reality, transcripts, as isoforms are included here) have been identified in this genome!
+
+```bash
+grep "^>" Osag_proteins.fasta | wc -l
+```
+
+At the moment, the genes are labelled non-descriptly as "jgXXXXX.tX". Perhaps we want to change these labels to make them look a bit more distinct. 
+
+
+Great, so there are 20,765 genes identified in the genome. Lets see if this infomation matches what is in our GTF file.
+
+For this task, lets utilize 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
