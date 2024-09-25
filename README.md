@@ -1,48 +1,35 @@
 # terminal-tutorial
-Introduction to navigating a computer's system files, presented to the Moczek Lab at Indiana University
+Introduction to navigating a computer's system files, presented to the Moczek Lab at Indiana University. This tutorial will have two parts: 
 
-## Navigating 
-- `Up Arrow`: Will show your last command
-- `Down Arrow`: Will show your next command
-- `Tab`: Will auto-complete your command
-- `Ctrl + C`: Will cancel a command
-- `~`: Home
+1) <b>Phil on screen</b>: Review of common terminal commands, referencing this nice guide: https://gist.github.com/bradtraversy/cc180de0edee05075a6139e42d5f28ce#file-terminal-commands-md
 
-## The Essentials
+2) <b>Together</b>: Working through a practice set of exercises, using a test set of genomic data from the Onthophagus sagittarius genome project (below).
 
-Print your current location:
-```bash
-pwd
-```
+## Exploring the <i>O. sagittarius</i> data
 
-List files in your current location (directory):
-```bash
-ls
-```
+Before we begin, please make sure you have saved the folder conatining Osag data (from OneDrive) to your "Desktop" and rename the folder "osag1". 
 
-There are many ways to customize the way in which files are listed.
-For example, as a vertical list:
+Now, lets navigate to this folder via the terminal, using the "call directory" command:
 
 ```bash
-ls -l
+cd ~/Desktop/osag1
 ```
 
-... or as a vertical list with human-readable information:
+And now let's check out what files are inside: 
 
 ```bash
-ls -lh
+ls -lh 
 ```
+We can see that our "osag1" directory has 2 files (the genome sequence, and a masked version of the genome sequence) and three directories containing information about how the genome was annotated (genes, repeats, and annotations). 
 
-Often it is useful to learn about a command's options. This can be done in two ways:
+We can also print what is inside other directories, without having to go into the directory first:
 
 ```bash
-man ls
-```
-```bash
-ls --help
+ls -lh ./genes
 ```
 
-
-
-
+This directory contains three files.
+1) A `gtf` file that describes the genomic locations of different gene features
+2) A `fasta` file describing the nueclotide form of Osag genes
+3) A `fasta` file describing the protein form of Osag genes
 
