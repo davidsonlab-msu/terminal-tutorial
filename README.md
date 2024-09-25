@@ -74,12 +74,30 @@ This printed out many lines. How many exactly? We can "pipe" the results of one 
 grep "^>" Osag_proteins.fasta | wc -l
 ```
 
-At the moment, the genes are labelled non-descriptly as "jgXXXXX.tX". Perhaps we want to change these labels to make them look a bit more distinct. 
+At the moment, the genes are labelled non-descriptly as "jgXXXXX.tX". Perhaps we want to change these labels to make them look a bit more distinct. Lets substitute "os_" for "jg" and create a new protein fasta file with these labels.
 
+To do this, lets use `sed`, a powerful text manipulation programming language. A typical sed command for text substitution follows `sed 's/X/Y/g'`, where X is the original text and Y is the text you want to substitute in. So for our purposes, lets try to make the substitution and pipe the results to a `grep` and `head` command to preview our change. 
+
+```bash
+sed 's/jg/os_/g' Osag_proteins.fasta | grep "^>" | head
+```
+
+If we are happy with the change we are trying to make, we can save the updated file to a new one using the `>` character:
+
+```bash
+sed 's/jg/os_/g' Osag_proteins.fasta > Osag_proteins_clean.fasta
+```
+
+Lets check that the file was created and preview its contents to make sure the correct change worked: 
+
+```bash
+ls -lh
+head Osag_proteins_clean.fasta
+```
 
 Great, so there are 20,765 genes identified in the genome. Lets see if this infomation matches what is in our GTF file.
 
-For this task, lets utilize 
+For this task, lets utilize `awk`, another powerful text manipulating programming language
 
 
 
