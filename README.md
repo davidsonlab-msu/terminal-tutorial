@@ -126,7 +126,13 @@ Seems like its working! Lets count and see if the value matches that from the pr
 ```bash
 awk -v FS="\t" '{if ($3 == "transcript")  print }' Osag1.gtf | wc -l
 ```
-Indeed it does. 
+Indeed it does. How about the number of genes? 
+
+```bash
+awk -v FS="\t" '{if ($3 == "gene")  print }' Osag1.gtf | wc -l
+```
+
+Why is this different than the number transcripts?
 
 To finish today, lets try to now find out more about the function of these gene models. For this, lets dive into the `annotations` folder. But first, for the sake of the exercise, lets make a copy of our `*nucleotides.fasta` file and place it into our annotations folder. 
 
@@ -147,10 +153,33 @@ Let's check out the `Osag_best_hits.txt` file, which tells us the best annotatio
 head Osag_best_hits.txt
 ```
 
-Now, lets do a *rough* search for 
+Now, lets do a *rough* search for genes potentiall related to insulin signalling using `grep`:
 
+```bash
+grep "insulin" Osag_best_hits.txt
+```
 
+It is a bit messy, so lets just print the 1st and 5th columns by piping the `grep` result into `awk`:
 
+```bash
+grep "insulin" Osag_best_hits.txt | awk -v FS="\t" -v OFS="\t" '{print $1,$5}'
+```
+
+To end, lets look at our work with the `history` command and the try a few exercises. 
+
+```bash
+history -100
+```
+
+## Exercises
+
+1) Change the prefix name of the genome scaffolds to "chromosome" and save to a new file
+
+*This one may require some sluething with the `man` command*
+
+2) Calculate the size of the Osag genome (remember to not count the names of the scaffolds/chromosomes in your calculation! e.g. >Scaffold...)
+
+3) Write a *single* command that prints the location (Scaffold, Start, and End) of the twisted gastrulation gene. 
 
 
 
