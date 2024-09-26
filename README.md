@@ -179,7 +179,7 @@ history -100
 
 2) Calculate the size of the Osag genome (remember to not count the names of the scaffolds/chromosomes in your calculation! e.g. >Scaffold...)
 
-3) Write a *single* command that prints the location (Scaffold, Start, and End) of the twisted gastrulation gene. 
+3) Write a *single* command that prints the location (Scaffold, Start, and End) of the twisted gastrulation gene. *hint: check out grep -f and /dev/stdin*
 
 
 
